@@ -8,7 +8,7 @@
 ## 読む / Read
 
 - **Web版（推奨）**: GitHub Pages で `index.html` をそのまま閲覧できます → https://beachcities.github.io/un-osw-2026-report/
-- **PDF版**: [`report/UN_OSW_2026_Report_public_v1.pdf`](report/UN_OSW_2026_Report_public_v1.pdf)（46ページ）
+- **PDF版**: [`report/UN_OSW_2026_Report_public_v2.pdf`](report/UN_OSW_2026_Report_public_v2.pdf)（46ページ）
 
 ## 構成 / Structure
 
@@ -16,7 +16,7 @@
 |---|---|
 | `index.html` | 配布版（画像を埋め込んだ自己完結HTML。Pagesの入口） |
 | `report/…public_v1.pdf` | PDF版（頁番号付き・印刷用） |
-| `src/public_v1.html` | 正本（画像を外部参照する機械可読版） |
+| `src/public_v2.html` | 正本（画像を外部参照する機械可読版） |
 | `src/images/` | 正本が参照する図版一式（最適化済み） |
 | `src/build_dist.py` | 正本→配布版の生成スクリプト（One Source, Multi-Use の実演として同梱） |
 
