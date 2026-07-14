@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="color-scheme" content="light">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UN Open Source Week 2026 出張報告書</title>
+<style>
+  :root{
+    --un:#009edb; --navy:#0a1f44; --ink:#13233f; --paper:#f7f9fc;
+    --line:#d4dde8; --muted:#5b6b82; --accent:#1c3f5f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP",-apple-system,system-ui,sans-serif;
+    color:var(--ink); background:var(--paper); line-height:1.9;
+    -webkit-font-smoothing:antialiased; font-size:16px;
+  }
+  img{display:block;width:100%;height:auto}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  .narrow{max-width:62ch;margin-left:auto;margin-right:auto}
+
+  /* ---- hero (opening experience) ---- */
+  .hero{position:relative;min-height:96vh;display:flex;align-items:flex-end;
+    background:linear-gradient(180deg,rgba(8,20,46,.30),rgba(8,20,46,.86)),
+    url('images/IMG_2863.jpeg') center 30%/cover no-repeat;color:#fff}
+  .hero .wrap{padding-bottom:9vh;padding-top:12vh}
+  .kick{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--un);font-weight:700;margin-bottom:20px}
+  .hero h1{font-size:clamp(2rem,5.4vw,3.8rem);font-weight:800;line-height:1.12;
+    letter-spacing:-.01em;margin-bottom:18px}
+  .hero .sub{font-size:clamp(1rem,2vw,1.2rem);max-width:48ch;color:#dce6f4;font-weight:400}
+  .hero .meta{margin-top:28px;font-size:.86rem;color:#aebfd6;letter-spacing:.03em;
+    border-top:1px solid rgba(255,255,255,.22);padding-top:16px;line-height:1.9}
+  .hero .meta b{color:#fff;font-weight:700}
+  .cap-hero{position:absolute;bottom:12px;right:16px;font-size:.66rem;color:rgba(255,255,255,.55);letter-spacing:.04em}
+
+  /* ---- lede (opening experience prose) ---- */
+  .lede{padding:70px 0 10px}
+  .lede p{font-size:1.16rem;margin:0 auto 1.3em;color:var(--ink)}
+  .lede .big{font-size:1.34rem;font-weight:700;color:var(--navy);line-height:1.6}
+
+  /* ---- day sections (the record — kept as spine) ---- */
+  .day{padding:58px 0 6px}
+  .day-head{border-top:3px solid var(--navy);padding-top:16px;margin-bottom:6px;
+    display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .day-num{font-size:.74rem;font-weight:800;letter-spacing:.28em;color:var(--un)}
+  .day-head h2{font-size:clamp(1.35rem,3.2vw,2rem);font-weight:800;color:var(--navy);letter-spacing:-.01em}
+  .day-lead{font-size:1.02rem;color:var(--ink);margin:12px 0 26px}
+  .day .body p{margin:0 auto 1.1em;color:var(--ink)}
+  .day h4{font-size:1.05rem;font-weight:800;color:var(--navy);margin:26px auto 6px}
+  .day h3{font-size:1.1rem;font-weight:800;color:var(--accent);margin:26px auto 8px;max-width:62ch}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:.85em;background:#eef2f6;padding:1px 5px;border-radius:3px}
+  em{font-style:italic}
+
+  /* ---- figures (three tiers) ---- */
+  figure{margin:24px auto;max-width:820px}
+  figure img{border-radius:6px;box-shadow:0 4px 20px rgba(10,31,68,.13)}
+  figcaption{font-size:.86rem;color:var(--muted);margin-top:9px;line-height:1.65;
+    padding-left:13px;border-left:2px solid var(--un)}
+  figcaption .fig-label{font-weight:700;color:var(--un);letter-spacing:.03em}
+  figcaption strong,figcaption b{color:var(--ink);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px auto;max-width:820px}
+  .grid2 figure{margin:0;max-width:none}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px auto;max-width:820px}
+  .grid3 figure{margin:0;max-width:none}
+  .grid3 figcaption{font-size:.76rem}
+  /* large feature figure */
+  .figure-lg{margin:36px auto;max-width:1040px}
+  .figure-lg img{border-radius:8px;box-shadow:0 8px 34px rgba(10,31,68,.22)}
+  .figure-lg figcaption{font-size:.9rem;text-align:left}
+  /* acknowledgment block */
+  .thanks{padding:70px 0;margin:20px 0}
+  .thanks .wrap{max-width:60ch}
+  .thanks h3{font-size:1.15rem;font-weight:800;color:var(--navy);letter-spacing:.02em;margin-bottom:20px;text-align:center}
+  .thanks p{font-size:1.02rem;line-height:2;color:var(--ink)}
+
+  /* ---- speaker chips ---- */
+  .spk{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin:22px auto;max-width:820px}
+  .spk h4{font-size:.78rem;letter-spacing:.06em;color:var(--un);text-transform:uppercase;margin-bottom:12px;font-weight:700}
+  .spk ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 26px}
+  .spk li{font-size:.92rem;padding-left:14px;position:relative;line-height:1.5}
+  .spk li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;background:var(--un);border-radius:50%}
+  .spk li b{font-weight:700;color:var(--ink)}
+  .spk li span{color:var(--muted);font-size:.83rem;display:block}
+
+  /* ---- pull quote ---- */
+  .pull{margin:40px auto;padding:30px 34px;background:var(--navy);border-radius:8px;max-width:820px}
+  .pull p, .day .body .pull p{font-size:1.24rem;font-weight:600;line-height:1.6;color:#fff}
+  .pull .who, .day .body .pull .who{margin-top:14px;font-size:.84rem;color:var(--un);letter-spacing:.04em}
+
+  /* ---- note box ---- */
+  .note{background:#eef3f9;border-radius:8px;padding:16px 20px;margin:22px auto;max-width:820px;
+    font-size:.9rem;color:var(--muted);line-height:1.75}
+  .note b,.note strong{color:var(--ink)}
+
+  /* ---- band (mid experience: 原風景 gallery) ---- */
+  .band{position:relative;color:#fff;padding:76px 0;margin:52px 0}
+  .band-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,46,.62),rgba(8,20,46,.72)),
+    url('images/IMG_2945.jpeg') center/cover no-repeat}
+  .band .wrap{position:relative}
+  .band h3{font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:800;margin-bottom:14px;color:#fff}
+  .band p{color:#dce6f4;font-size:1.04rem}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px}
+  .gallery img{border-radius:5px;box-shadow:0 3px 16px rgba(0,0,0,.3);aspect-ratio:4/3;object-fit:cover}
+  .gallery figcaption{color:#aebfd6;border:0;padding:6px 0 0 0;font-size:.72rem}
+
+  /* ---- closing (exit experience) ---- */
+  .close{position:relative;color:#fff;text-align:center;padding:190px 0 90px;margin-top:56px;
+    background:linear-gradient(180deg,rgba(8,20,46,.15) 0%,rgba(8,20,46,.40) 32%,rgba(8,20,46,.78) 62%,rgba(6,14,32,.94) 100%),
+    url('images/IMG_2942.jpeg') center 40%/cover no-repeat}
+  .close h2{font-size:clamp(1.5rem,3.6vw,2.4rem);font-weight:800;margin-bottom:18px}
+  .close p{max-width:52ch;margin:0 auto 1em;color:#dce6f4;font-size:1.05rem;line-height:1.8}
+  .close .amplify{font-size:1.3rem;font-weight:700;color:#fff;margin-top:24px}
+  .close .cap{margin-top:36px;font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:.06em}
+
+  footer{background:var(--navy);color:#9fb2cf;padding:40px 24px;font-size:.82rem;line-height:1.85}
+  footer .wrap{max-width:820px}
+  footer b{color:#dce6f4}
+  footer code{background:rgba(255,255,255,.1);color:#cfe0f4}
+
+  @media(max-width:680px){
+    .grid2,.grid3{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr 1fr}
+    .spk ul{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  /* ---- navy text override for specific bright-background blocks (user choice C) ---- */
+  .band-navytext h3{color:var(--navy)}
+  .band-navytext p{color:var(--navy)}
+
+  /* ---- readability v3: 混在背景対策（明背景=濃紺+白ハロー / 暗部=白+黒ハロー） ---- */
+  /* band①: 暗オーバーレイをやめ明るいスクリムに（背景を明るいまま活かす方針） */
+  .band-navytext .band-bg{background:linear-gradient(180deg,rgba(246,249,252,.40),rgba(246,249,252,.55)),
+    url('images/IMG_2945.jpeg') center/cover no-repeat}
+  .band-navytext h3,.band-navytext p{
+    text-shadow:0 0 2px #fff,0 0 8px rgba(255,255,255,.92),0 0 22px rgba(255,255,255,.65)}
+  .band-navytext .gallery figcaption{color:rgba(10,31,68,.8);text-shadow:0 0 6px rgba(255,255,255,.85)}
+  /* closing: シネマ型スクリム＝全白文字＋黒ハロー（v5: 位置依存の色分けを廃止） */
+  .close h2,.close p,.close .amplify{color:#fff;
+    text-shadow:0 1px 3px rgba(0,0,0,.8),0 0 16px rgba(0,0,0,.55)}
+  .close .cap{color:rgba(255,255,255,.78);text-shadow:0 1px 3px rgba(0,0,0,.8)}
+
+  /* ---- figure size tiers (v5) ---- */
+  .fig-m{max-width:640px}
+  .fig-s{max-width:480px}
+
+  /* ---- v5: 前付・部（やや硬めの公文パート） ---- */
+  .front{background:var(--paper);padding:64px 24px 30px}
+  .front .wrap{max-width:64ch;margin:0 auto}
+  .front h3{font-size:1.08rem;font-weight:800;color:var(--navy);margin:34px 0 14px;
+    padding-left:12px;border-left:3px solid var(--un)}
+  .front p{font-size:.98rem;line-height:1.95;color:var(--ink);margin-bottom:1em}
+  .front ul,.front ol{margin:0 0 1em 1.4em;font-size:.98rem;line-height:1.9;color:var(--ink)}
+  .front li{margin-bottom:.45em}
+  .part .body h4{font-size:.98rem;font-weight:700;color:var(--navy);margin:26px 0 10px}
+  .part .body ul,.part .body ol{margin:0 0 1em 1.4em;line-height:1.9}
+  .part .body li{margin-bottom:.45em}
+  .ptbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:18px 0;line-height:1.6}
+  .ptbl th{background:var(--navy);color:#fff;font-weight:700;padding:8px 10px;text-align:left}
+  .ptbl td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top;color:var(--ink)}
+
+  /* ---- print / PDF page-break control ---- */
+  @media print{
+    /* v5: 全ページに天地マージン（頭切れ・尻切れの根治）。全面ブロックのみフチなし */
+    @page{margin:12mm 0 14mm}
+    @page bleed{margin:0}
+    .hero,.band,.close,footer{page:bleed}
+    figure, .pull, .spk, .band, .thanks, .figure-lg{break-inside:avoid; page-break-inside:avoid}
+    .band, .close{break-before:auto}
+    /* v5: 縦長写真がページを独占して前ページに穴を開けるのを防ぐ */
+    figure img{max-height:168mm;width:auto;max-width:100%;margin-left:auto;margin-right:auto;display:block}
+    .ptbl{break-inside:avoid}
+    .day-head{break-after:avoid; page-break-after:avoid}
+    h2,h3,h4{break-after:avoid; page-break-after:avoid}
+    figcaption{break-before:avoid}
+  }
+
+  /* ---- v14 モバイル表示堅牢化（見た目不変のフォールバック。文面変更なし） ---- */
+  :root{color-scheme:light}
+  .hero{background-color:#0a1f44}
+  .band{background-color:#0a1f44}
+  .band-bg{background-color:#0a1f44}
+  .band-navytext{background-color:#e9eef5}
+  .band-navytext .band-bg{background-color:#e9eef5}
+  .close{background-color:#0a1f44}
+  @media (prefers-color-scheme: dark){
+    html,body{background:var(--paper);color:var(--ink)}
+  }
+
+  /* ---- v15 ビューア対策: bodyの紙色に依存せず本文セクション自身が紙色を持つ ---- */
+  .lede,.day,.thanks{background-color:var(--paper)}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO (入口の体験ブロック) ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kick">出張報告書（公開版） ｜ Digital Agency</div>
+    <h1>UN Open Source Week 2026</h1>
+    <p class="sub">国連本部を舞台に、Open Source・AI・DPI・OSPO をめぐって世界の実務者が集った一週間の記録。</p>
+    <div class="meta">
+      <b>会期</b>　2026年6月22日（月）〜26日（金）／ニューヨーク<br>
+      <b>会場</b>　国連本部（Day 1–4）／ IBM One Madison（Day 5）<br>
+      <b>報告</b>　データユニット長　山田政幸
+    </div>
+  </div>
+  <div class="cap-hero">安全保障理事会議場（Security Council Chamber）</div>
+</header>
+
+<!-- ============ LEDE (入口の散文) ============ -->
+<section class="lede">
+  <div class="wrap narrow">
+    <figure>
+      <img src="images/IMG_1276.jpeg" alt="国連本部">
+      <figcaption><span class="fig-label">国連本部</span>　人々が「国連」と聞いて思い浮かべる、あの建物である。ここに足を踏み入れるところから、一週間が始まる。（2025年撮影）</figcaption>
+    </figure>
+    <p class="big">セキュリティを抜け、IDカードを首から提げて最初に出迎えるのは、銃身の結ばれた一挺の拳銃だった。昨年は、それに目をやる余裕もなかった。</p>
+    <p>昨年、私はこの Open Source Week に、Trusteeship Council という大舞台で、たった一つのセッションに登壇した。それでも、多くの気づきを持ち帰る旅だった。今年は登壇の数も、招かれた会議も増えた。本報告は、その中で得た気づきの記録である。</p>
+    <figure style="max-width:560px">
+      <img src="images/IMG_1303.jpeg" alt="昨年の登壇 Trusteeship Council">
+      <figcaption><span class="fig-label">2025</span>　昨年の登壇 ── Trusteeship Council（UN Open Source Week 2025）。一つのセッションから、この旅は始まった。</figcaption>
+    </figure>
+    <p>外交官がずっと、閉ざされた部屋で言葉を交わしてきたこの場所に、Open Source が持ち込まれた。開くとは何か。その境界は、どこに引かれるべきか。一週間、その問いが低く響いていた。</p>
+  </div>
+</section>
+
+<section class="front">
+  <div class="wrap">
+    <h3>本報告書について</h3>
+    <p>デジタル庁は、本年の UN Open Source Week 2026 に対して後援（Endorsement）を行った。本報告書は、後援した取組の成果を記録し、今後の検討に資することを目的として作成されたものである。庁内での共有を経て、その記録としての価値に鑑み、ここに公開版として公開する。本記録は、庁内外の多くの方々の支えの上に成り立っている。</p>
+    <p>すなわち、今後、デジタル庁が UN Open Source Week への関与を検討する際に、ゼロからの説明を要せず、本報告が参考となることを企図している。</p>
+    <p>本報告書は、三つの柱で構成し、末尾に継続事項を加える。</p>
+    <ul>
+      <li>第1部：出張報告 ―― UN Open Source Week 2026 の全体像と、当職の登壇の記録。</li>
+      <li>第2部：後援（Endorsement）の背景と、想定した意義の確認</li>
+      <li>第3部：OSPOに関する認識 ―― 今般の出張を通じて確認できたこと。</li>
+      <li>第4部：継続事項と今後 ―― 今後の検討に向けて。</li>
+    </ul>
+    <p>なお、記述にあたっては事実に基づき抑制的に記すことを旨とし、機微にわたる事項や進行中の検討事項については本報告書では立ち入らない。公開版では、調整中・未公表の事項を割愛した箇所に、その旨を明記している。</p>
+    <h3>エグゼクティブ・サマリー</h3>
+    <ol>
+      <li>デジタル庁は UN Open Source Week 2026 を後援した。本報告書は、その後援の意義を成果に照らして確認し、今後の検討に資する記録とするものである。</li>
+      <li>当職は、ODET事務次長（USG）名による正式招聘に基づき Day4 の Country Spotlight（日本の産官学による「Japan Model」）に登壇したほか、Day5 のCommunity Day、および 6月23日のモロッコ政府・UNDP共催のハイレベル・ラウンドテーブル（D4SD）に登壇した。公式パートナーとして、デジタル庁は Member States のカテゴリに「Endorsement」として掲載された。</li>
+      <li>後援に際して想定した「国際的プレゼンスの向上」「オープンソース推進への貢献の明示」「政策・技術情報の収集」という意義は、いずれも具体的な形で確認された。とりわけ、登壇を起点として、国連機関・各国政府・国際的なコミュニティとの間に、質の高い双方向の関係が築かれた。</li>
+      <li>全庁にとっての価値として、オープンソースとオープンデータを「デジタル公共財」として捉える視点、およびソフトウェアとデータの二次利用ライセンスの共通性という論点を、改めて確認した。これらは特定の班の関心にとどまらず、調達・標準化・データ戦略・AIといった全庁の担務に通底する。</li>
+      <li>OSPO（Open Source Program Office）について、デジタル庁には組織は存在しないが機能は実態として確立しつつあり、戦略的自律性（Sovereignty）と脆弱性（Vulnerability）への対応として政策的重要性を増していることを、今般の出張を通じて確認した。</li>
+      <li>今般の出張を通じて、国連の指標枠組み（OSEC）、Linux Foundation、米商務省、各国政府・学術機関との間に、複数の継続的な接点を得た。これらの関与の度合いについては、機会と留意点の双方を勘案し、庁として判断すべき事項である。</li>
+    </ol>
+  </div>
+</section>
+
+<section class="day part">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">第1部</span><h2>出張報告</h2></div>
+    <div class="body narrow">
+<h3>1.1　UN Open Source Week 2026 の全体像と各セッションの記録</h3>
+<p>本節は、UN Open Source Week 2026 の公式アジェンダを中心に、各日の各セッションの内容・主催・話者を可能な限り明記して記録するものである。記載する各セッションは、いずれもデジタル庁の幅広い業務と接点を持ちうるが、個別の所掌の確認を要するため、本報告書では特定の担務への接続を断定しない。今後、関与を検討する際に、「どのテーマに、どの主体（各国・国際機関・企業・コミュニティ）が関わっているか」をゼロから調べ直すことなく把握できる資料となることを意図している。</p>
+<h4>全体概要</h4>
+<p>会期は2026年6月22日〜26日。会場はDay1〜4が国連本部、Day5はIBM One Madison。主催は UN Office for Digital and Emerging Technologies（ODET）および UN Office of Information and Communications Technology（OICT）。テーマは "Forging the Future of Digital Cooperation"。2025年は75カ国・1,000名が参加した。オープンソース・DPI・AIという、普段は交わらない三つのコミュニティを結ぶ唯一のグローバルなプラットフォームであり、かつ技術コミュニティと政策立案者を橋渡しする場と位置づけられている。Global Digital Compact（GDC）およびSDGsの実装を主題とし、AI・DPI・OSPOの三つを軸に構成された。</p>
+<h4>会場運営について</h4>
+<p>各日の正午前後の時間帯は、複数のブレークアウトセッションが並行して開催される。このうち一つは引き続きメイン会場（ECOSOC Chamber）で実施され、残りは小規模な会議室で開催される。ECOSOC Chamberに配置されるのは、参加希望者が最も多いセッションである（後述するDay4の日本のCountry Spotlightも、約300名の参加希望があったためECOSOC Chamberでの開催となった）。また、13:00〜15:00 はランチの時間帯にあたり、この間に多くの非公式の催しが行われ、参加者同士の対話の重要な機会となっていた。</p>
+    </div>
+  </div>
+</section>
+
+<section class="day">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">DAY 1</span><h2>UN Tech Over</h2></div>
+    <div class="narrow"><p class="day-lead">「議論から実装へ」を掲げた実践中心の日。本会議に先立ち6月19日にAWS（JFK27）でハッカソンがローンチされ、ハイブリッドで進行、Day1に国連本部で最終ピッチを迎える構成。ECOSOC Chamberにて3つの「-A-Thon」が10:00〜18:00に並行開催された。</p></div>
+    <div class="body narrow">
+<p>UN Tech Over Hack-A-Thon（ECOSOC Chamber／最終ピッチをハイレベル審査員が審査）。冒頭挨拶：Thomas Jarzombek（ドイツ デジタル変革・政府近代化担当政務次官）、Amandeep Singh Gill（国連事務次長・デジタル/新興技術担当特使、UN-ODET）、Tshilidzi Marwala 教授（国連大学学長・国連事務次長）、Mandeep O'Brien（UNICEF）。技術課題は2トラック（Challenge 1: Safety, Supervision, and Governance in the Agentic World／Challenge 2: From Data to Action — Building Next Generation Evidence）。並行イベントとして Edit-A-Thon（Wikimedia Foundation連携）、Maintain-A-Thon（Sovereign Tech Agency連携）が開催された。</p>
+<figure>
+  <img src="images/IMG_2848.jpeg" alt="ECOSOC Chamber ハッカソンと源内チャット画面">
+  <figcaption><span class="fig-label">Day1 ｜ 図1</span>　<strong>源内が、国連議場にある。</strong> UN Tech Over Hack-A-Thon（ECOSOC Chamber、卓上端末に "HACK A THON" の表示）の会場で、手前は本人PCで開いた「ガバメントAI 源内」のチャット画面。モデル表記 <code>jp.anthropic.claude-opus-4-8</code>、利用履歴には渡航前から当日までの準備ログが残る。Day 4で語る「源内のOSS化」を、会期初日の時点で実機が現地にある形で先取りしていた。</figcaption>
+</figure>
+<div style="break-inside:avoid">
+<p>ハッカソンの最後に、ECOSOC Chamberにて参加者の集合写真が撮影された（当職も左端に参加）。</p>
+<figure>
+  <img src="images/Day1_hackathon_group.jpg" alt="Hack-A-Thon 参加者集合写真">
+  <figcaption><span class="fig-label">Day1 ｜ 集合写真</span>　<strong>UN Tech Over Hack-A-Thon 参加者集合写真</strong>（ECOSOC Chamber）。会期初日、国連本部に参加者が一堂に会した。当職も左端に加わった。出典：UN ODET 公式LinkedInより。</figcaption>
+</figure>
+</div>
+<div class="note">※当職は同日、OSEC（Open Source Enablement Compass）の Co-design Workshop にオブザーブ参加した。</div>
+<div class="grid2">
+  <figure>
+    <img src="images/IMG_2870.jpeg" alt="OSEC Co-design Workshop 配布資料">
+    <figcaption><span class="fig-label">Day1 ｜ 図2</span>　OSEC（Open Source Enablement Compass）Co-design Workshop。手前は配布された OSEC コンセプト資料（UN-ODET × RISE）。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2871.jpeg" alt="OSEC Co-design Workshop 登壇者">
+    <figcaption><span class="fig-label">Day1 ｜ 図3</span>　同ワークショップの様子。スクリーンに "OPEN SOURCE ENABLEMENT COMPASS / Co-design workshop #1"。当職はオブザーバーとして参加した。</figcaption>
+  </figure>
+</div>
+<figure>
+  <img src="images/IMG_9036.jpeg" alt="OSEC Co-design Workshop 参加者集合写真">
+  <figcaption><span class="fig-label">Day1 ｜ 集合写真</span>　<strong>OSEC Co-design Workshop 第1回 参加者集合写真</strong>。公共部門・産業界・国際開発・オープンソースコミュニティの専門家25名超が参加した。出典：主催者提供。</figcaption>
+</figure>
+<div class="note">※口頭の発言は行っていないが、会場のオンライン収集ツール（Menti）を通じて設計面の意見を一件提出した――OECDのデジタル政府指標への回答実務の経験から、多数の加盟国の参加を前提とする国連の枠組みでは、質問系のコンパクトさが参加率と回答品質を左右する、という趣旨である。本ワークショップの成果は帰国後、速報報告書「OSEC Co-design iteration #1」（RISE／UN ODET）として公刊され、上記の意見も付録に収録された。OSECの全体像および継続的な関与については第4部に後述する。</div>
+    </div>
+  </div>
+</section>
+<section class="day">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">DAY 2</span><h2>Open Source for AI and Emerging Technologies</h2></div>
+    <div class="narrow"><p class="day-lead">オープンソースを「サステナブルなAIの未来への入口」と位置づけ、①アクセシブルでインクルーシブなAI、②人権を守る責任ある安全性、③オープンハードウェアとレジリエントなサプライチェーン、を扱う日。</p></div>
+    <div class="body narrow">
+<div class="note">※当職は同日、後述するD4SDハイレベル・ラウンドテーブルへの登壇等への対応に時間を充てたため、Day2の公式セッションへの参加は限定的であった。以下は会議全体の記録として、公式アジェンダに基づき記載する。</div>
+<p>午前（ECOSOC Chamber）の開幕は、Amandeep Singh Gill（UN-ODET）と Yann LeCun（AMI Labs会長・ニューヨーク大学教授）によるキーノート＆fireside。LeCunは、安全保障や存在論的リスクを理由にオープンモデルへのアクセスを制限する議論を強く批判し、これを <em>medieval obscurantism（中世の蒙昧主義）</em> になぞらえた。オープンソースAIを、グローバルなAI主権・文化的/言語的多様性・長期的安全性にとって唯一の現実的な道と位置づけ、各国が自国の文化的素材をデジタル化して拠出するフェデレーテッドな構想（Project Tapestry）を示した。この "medieval" の比喩は、以後のセッションでも繰り返し参照され、会期中の通奏低音となった。</p>
+<div class="pull">
+  <p>安全保障を理由にAIへのアクセスを制限することは、15世紀に印刷機を禁じるようなものだ ── "medieval obscurantism"（中世の蒙昧主義）。</p>
+  <div class="who">Yann LeCun ／ Day 2 キーノート</div>
+</div>
+<div class="grid2">
+  <figure>
+    <img src="images/IMG_2887.jpeg" alt="Yann LeCun キーノート">
+    <figcaption><span class="fig-label">Day2 ｜ 図4</span>　<strong>Yann LeCun</strong> の単独キーノート。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2893.jpeg" alt="Fireside Chat">
+    <figcaption><span class="fig-label">Day2 ｜ 図5</span>　<strong>Fireside Chat</strong> — Amandeep Singh Gill（UN事務次長・デジタル/新興技術担当特使）との対談。</figcaption>
+  </figure>
+</div>
+<p>続く High-Level Discussion: Open Source for Digital Development では、シエラレオネ・ジャマイカ・モロッコの閣僚がパネルに並んだ。アジェンダ上のモデレーターは Verena Kontschieder（Opendata.ch）であったが、当日は欠席し、Dr. Mehdi Snene（UN）が代理でモデレーターを務めた。</p>
+<div class="spk">
+  <h4>Speakers ― High-Level Discussion: Open Source for Digital Development</h4>
+  <ul>
+    <li><b>H.E. Salima Bah</b><span>シエラレオネ 通信・技術・革新大臣</span></li>
+    <li><b>H.E. Audrey Marks</b><span>ジャマイカ 効率化・革新・デジタル変革大臣</span></li>
+    <li><b>H.E. Amal El Fallah Seghrouchni</b><span>モロッコ デジタル移行・行政改革担当大臣</span></li>
+    <li><b>Dr. Mehdi Snene（UN）</b><span>当日モデレーター（代理）</span></li>
+  </ul>
+</div>
+<figure>
+  <img src="images/IMG_2903.jpeg" alt="High-Level Discussion パネル">
+  <figcaption><span class="fig-label">Day2 ｜ 図6</span>　<strong>High-Level Discussion: Open Source for Digital Development.</strong> 三カ国の閣僚がひとつの壇に並んだ場面（ECOSOC Chamber）。登壇者は本文および図7〜9参照。</figcaption>
+</figure>
+<div class="grid3">
+  <figure>
+    <img src="images/IMG_2918.jpeg" alt="Salima Bah">
+    <figcaption><span class="fig-label">Day2 ｜ 図7</span>　<strong>H.E. Salima Bah</strong><br>シエラレオネ 通信・技術・革新大臣</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2913.jpeg" alt="Audrey Marks">
+    <figcaption><span class="fig-label">Day2 ｜ 図8</span>　<strong>H.E. Audrey Marks</strong><br>ジャマイカ 効率化・革新・デジタル変革大臣</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2907.jpeg" alt="Amal El Fallah Seghrouchni">
+    <figcaption><span class="fig-label">Day2 ｜ 図9</span>　<strong>H.E. Amal El Fallah Seghrouchni</strong><br>モロッコ デジタル移行・行政改革担当大臣</figcaption>
+  </figure>
+</div>
+<p>このほか正午の Open Robots では、ロボティクスのバリューチェーンのどこに "openness" が存在し成長に寄与するかが議論された。</p>
+<div class="grid2">
+  <figure>
+    <img src="images/IMG_2883.jpeg" alt="Open Robots ヒューマノイドロボット">
+    <figcaption><span class="fig-label">Day2 ｜ 図10</span>　<strong>Open Robots.</strong> ロボティクスのバリューチェーン（設計・ハードウェア・ソフトウェア・データ・製造）のどこに "openness" が存在し、成長に寄与するかを扱うセッション。会場に展示された AI² Robotics のヒューマノイドロボット。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2935.jpeg" alt="Open Robots 登壇者">
+    <figcaption><span class="fig-label">Day2 ｜ 図11</span>　Open Robots セッション参加者によるパネルディスカッション。</figcaption>
+  </figure>
+</div>
+<p>午後の Responsible GenAI at Scale（Linux Foundation＋スペインAESIA）、AI's Impact on Open Source（UNICEF＋DPGA）、夕方の Open Agents、閉会の Openness for Digital Cooperation（Mehdi Snene、Gill、Sergio Gago、エストニア司法・デジタル大臣 Liisa-Ly Pakosta）等が公式アジェンダに置かれた。</p>
+    </div>
+  </div>
+</section>
+<section class="day part">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">6/23</span><h2>1.2　当職の登壇 ― D4SD ハイレベル・ラウンドテーブル</h2></div>
+    <div class="body narrow">
+<h4>(1) セッションの概要と招聘の経緯</h4>
+<p>6月23日（火）、国連本部にて開催された D4SD Hub High-Level Strategic Roundtable on Open-Source AI Models（テーマ："Open Models, Open Futures: Building Sovereign AI for Africa and the Arab States"）に、当職は登壇した。本ラウンドテーブルは、モロッコ王国（デジタル移行・行政改革省）とUNDPの共催による、閣僚級のハイレベル・セッションである。</p>
+<p>本登壇は、モロッコの Amal El Fallah Seghrouchni 大臣からの親書（当職の "Head of Data Unit" 宛）による招聘に基づくものであり、両国の常駐代表部を通じて、外務省（国際）宛に口上書（Note Verbale）が発出される公式の枠組みであった。打診は渡航前週（木曜）に外務省経由で受けたものであり、サイドイベントの位置づけながら、主権国家の閣僚と国連機関が共催する場であった。</p>
+<p>当職の登壇枠は 16:18〜16:23 の5分間、テーマは「Public sector delivery perspective — From policy to implementation（公共部門の実装の視点 ― 政策から実装へ）」である。本ラウンドテーブルは、アフリカ・アラブ諸国を中心とする各国の政府関係者・国際機関・有識者が参加する閣僚級のセッションであり、司会進行は UNDP の担当者がモデレーターとして務めた。</p>
+<div class="note">※当日の出席者を当職として網羅的に把握できていないため、本報告書では共演者の個別の列挙は控える。本登壇は前週木曜に外務省経由で打診を受けた直前の追加登壇であり、随行員のいない単独の出張において対応したものである。閣僚級の場への登壇が、口上書を伴う公式の外交ルートで要請された事実とあわせ、記録として残す。</div>
+<h4>(2) 5分発言の内容 ― 「政策から実装へ」</h4>
+<p>5分間の発言では、以下を述べた。</p>
+<ul>
+<li>冒頭、現地の文脈（local context）への敬意がデジタル主権（digital sovereignty）の核心であることを、自身の経験を糸口に語った。当職は1993年、学生時代にモロッコを旅し、現地の文化・言語に触れた経験がある。この体験を糸口に、主題への導入とした。</li>
+<li>次に、オープンソースが「利用者」から「共同制作者（co-author）」への転換を可能にすることを示した。日本が縦書き（vertical typesetting）のために行ったローカルなパッチをCSS標準へ還元した取組は、結果としてアラビア語やモンゴル語の表示支援にも波及した。これは、アラブ諸国・アフリカ諸国が主賓である本セッションの文脈に即した例である。</li>
+<li>実装の現実（implementation reality）として、ガバメントAI「源内」を約18万人の公務員に展開し、本年4月にその一部を商用利用可能なライセンスでGitHub公開したことに触れ、「モデルを持つことは始まりにすぎない」と述べた。</li>
+<li>評価データの逸話（lawqa_jp。評価用データとして弁護士が作成した法律の四択問題で、複数のAIが人間の作成した正答キーの誤りを発見した経験）を引き、「障壁はAIではなく、自分たち自身が、自らの規則を完全に解釈する能力の側にあった」と述べた。</li>
+<li>結びとして、主権の再定義を提起した。すなわち、「計算資源を保有すること以上に、自国の評価用データ（test data）を自ら構築することが重要になり得る」「自己理解は外注できない」「オープンソースで主導するには、自らの "ground truth（正解）" を自ら持たねばならない」と述べた。</li>
+</ul>
+<p>発言後、司会進行の中で当職への追加質問はなく、5分の発言をもって当職の登壇は終了した。</p>
+<h4>(3) 位置づけ</h4>
+<p>本登壇で当職が述べた「現地の文脈への敬意 → デジタル主権 → 自らの ground truth を持つこと」という論旨は、Day4 Country Spotlightで提示した "Sovereign Openness"、およびDay5で提示した "Responsible Openness"（評価用データのキュレーションこそが公共部門の貢献である、という論点）と、一貫した知的な背骨を共有している。場ごとに導入（モロッコの旅、源内、lawqa_jp）を変えつつ、同一の主題――主権と開放性、そして「開いた先で何を自ら整えるか」――を貫いたものである。</p>
+    </div>
+  </div>
+</section>
+
+<section class="day">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">DAY 3</span><h2>DPI Day</h2></div>
+    <div class="narrow"><p class="day-lead">DPIを「デジタル経済とデジタル変革の重要なイネーブラー」と位置づけ、Global Digital Compact（GDC）の投資・セーフガードのコミットメントを具体的なアクションに落とすことを主題とした日。</p></div>
+    <div class="body narrow">
+<div class="note">※当職はこの日、基本的にECOSOC Chamberに在席し、本流の議論を傍聴した（DPI for Inclusive Growth、Making DPI Work for Children 等）。ただし翌日のCountry Spotlight（Day4）の準備と並行していたため、内容を十分に聴き取れなかった部分もある。並行して小会議室で開催された各セッションには参加していない。以下は公式アジェンダに基づく記録である。</div>
+<p>午前（ECOSOC Chamber）の開幕fireside は Yolanda Martinez（世界銀行）、エストニア、ドミニカ共和国。続く Turning Global Commitments into Action（モデレーター：Amandeep Singh Gill／UN-ODET）では、GDCおよび第4回開発資金国際会議（FfD4）のDPIコミットメントが国・地域レベルでどう具体的アクションへ翻訳されつつあるかが議論された（登壇者は下記SPEAKERS欄のとおり）。</p>
+
+<div class="spk">
+  <h4>Speakers ― Turning Global Commitments into Action</h4>
+  <ul>
+    <li><b>Amandeep Singh Gill</b><span>国連事務次長／モデレーター、UN-ODET</span></li>
+    <li><b>H.E. Salima Bah</b><span>シエラレオネ 通信・技術・革新大臣</span></li>
+    <li><b>H.E. Audrey Marks</b><span>ジャマイカ 効率化・革新・デジタル変革大臣</span></li>
+    <li><b>Ahunna Eziakonwa</b><span>UNDP アフリカ地域局長</span></li>
+    <li><b>Bakhtiyar Mukhametkaliyev</b><span>カザフスタン AI・デジタル開発副大臣</span></li>
+    <li><b>H.E. Amal El Fallah Seghrouchni</b><span>モロッコ デジタル移行・行政改革担当大臣</span></li>
+  </ul>
+</div>
+<div class="grid3">
+  <figure>
+    <img src="images/IMG_2961.jpeg" alt="Opening Fireside Chat">
+    <figcaption><span class="fig-label">Day3 ｜ 図12</span>　<strong>Opening Fireside Chat.</strong> DPI Day の開幕対話。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_2972.jpeg" alt="Turning Global Commitments into Action">
+    <figcaption><span class="fig-label">Day3 ｜ 図13</span>　<strong>Turning Global Commitments into Action.</strong> 発言席からの一場面（ECOSOC Chamber）。登壇者は上のSPEAKERS欄参照。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_3012.jpeg" alt="DPI for Inclusive Growth">
+    <figcaption><span class="fig-label">Day3 ｜ 図14</span>　<strong>DPI for Inclusive Growth.</strong> DPIが異なる文脈でどのように包摂的な経済成長を促すか。DPI成熟度の異なる三地域の閣僚・実務家が、越境DPIを機能させる条件、必要な資金とセーフガード、後発国への支援を論じたパネル。</figcaption>
+  </figure>
+</div>
+
+<p>午後は Making DPI Work for Children（ECOSOC Chamber、傍聴）等が続き、夕方の DPI for Inclusive Growth、閉会（Gill、Robert Opp／UNDP、CV Madhukar／Co-Develop）を経て、夜は AWS主催の Speaker Reception（AWS JFK27）へと続いた。</p>
+
+<h4 style="margin-top:18pt;">Speaker Reception（AWS主催 ／ 6/24夜 ／ AWS JFK27）</h4>
+<p>「The Global Case for Open in AI: How Open Source and Open Standards Build Trust Across Borders」と題し、ベンダーロックイン・相互運用性の欠如・不透明なAIが世界的にAI導入の最大の障壁であるとの問題意識のもと、MCP・ACP・AG-UI 等のオープンプロトコルがマルチベンダー環境でAIの相互運用と信頼をどう築くかが議論された。レセプションは、登壇者間の交流を通じてネットワークを構築していく場として機能している。</p>
+
+<div class="grid2">
+  <figure>
+    <img src="images/IMG_3021.jpeg" alt="Gill 開会挨拶">
+    <figcaption><span class="fig-label">Day3 ｜ 図15</span>　Speaker Reception の Opening Remarks。Amandeep Singh Gill（国連事務次長／事務総長テクノロジー特使、UN-ODET）。AWS主催、会場は AWS JFK27（マンハッタン）。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_3023.jpeg" alt="登壇者一覧スライド">
+    <figcaption><span class="fig-label">Day3 ｜ 図16</span>　<strong>The Global Case for Open in AI: How Open Source and Open Standards Build Trust Across Borders.</strong> 招待制・登壇者を対象としたやや専門性の高い対話の場。MCP・ACP・AG-UI 等のオープンプロトコルが、マルチベンダー環境で越境的に相互運用可能で透明性あるAIの基盤をどう築くかを論じた。モデレーター Joshua Meltzer（AWS）、Dr. Sarah Bird（Microsoft）、Eva Hampl（Dell）、Angie Jones（Agentic AI Foundation）、Dr. Mehdi Snene（UN）。</figcaption>
+  </figure>
+</div>
+
+<figure class="fig-m">
+  <img src="images/IMG_8754.jpeg" alt="レセプション会場受付にて">
+  <figcaption><span class="fig-label">Day3 ｜ 図17</span>　レセプション会場受付にて。Day 4 の Country Spotlight で共に登壇するトヨタ（LF Japan）OSPOの遠藤雅人氏と。</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+<section class="day">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">DAY 4</span><h2>OSPOs for Good</h2></div>
+    <div class="narrow"><p class="day-lead">OSPOの価値を持続可能な開発・デジタル変革の文脈で示す日。趣旨は、①Member StatesへのOSPO実装の提唱（ガバナンス横断でOSS戦略を実行する中心的な柱）、②UN機関でのsecure/sustainableなOSS採用の加速、③能力構築とグローバルな知識共有。正午のCountry Spotlight（後述・1.2）に当職が登壇した。</p></div>
+    <div class="body narrow">
+<h3>1.2（続）当職の登壇 ― Day4 Country Spotlight（OSPOs for Good）</h3>
+<p>6月25日（木）「OSPOs for Good」の正午、ECOSOC Chamberにて Country Spotlight: Lessons from Open Source Implementation in Japan が開催され、当職はデジタル庁を代表する登壇者の一人として参加した。本登壇は、ODET事務次長（USG）Amandeep Singh Gill 氏名による正式な招聘状（3月30日付）に基づくものである。本セッションは約300名の参加希望があり、当該時間帯の並行セッションの中で、ECOSOC Chamberでの開催となった。</p>
+<p>本セッションの特徴は、日本の産業界・行政・学術界が一体となって登壇した点にある。冒頭に「Japan Model」の全体像を示し（キーノート：遠藤雅人氏／LF Japan Evangelist）、続いて官（当職・東京都）→学→産→対話、という構成で進行した。</p>
+
+<figure>
+  <img src="images/IMG_8921.jpeg" alt="Country Spotlight 登壇の一場面">
+  <figcaption><span class="fig-label">Day4</span>　Country Spotlight「Lessons from Open Source Implementation in Japan」での登壇（ECOSOC Chamber）。</figcaption>
+</figure>
+
+<figure class="fig-m">
+  <img src="images/IMG_8824.jpeg" alt="産官学7名 登壇集合写真">
+  <figcaption><span class="fig-label">Day4 ｜ 図18</span>　<strong>登壇後、日本チームで。</strong> 産官学それぞれの現場を持つ7名が、ひとつのナラティブとして「Japan Model」を立てた。遠藤雅人（トヨタ・LF Japan）、桑田昌行（Sony）、日下部雄一（Honda）、石井宏幸（Panasonic）、梶田将司（名古屋大学）、知花謙（東京都）、山田政幸（デジタル庁）。</figcaption>
+</figure>
+
+<p>当職は、オープンデータ・GIF班の担務群リーダーとして有するデータの二次利用ライセンスの知見が、ソフトウェアの二次利用（OSS）の領域にも通じる立場、および内閣府CSTI／BRIDGEのもとで実施した調査研究のプログラムディレクターを拝命した立場から、官パートの前半を担った。発信の中核は以下の2点である。</p>
+<p>① <strong>Sovereign Openness（主権的な開放性）</strong>：ガバメントAI「源内」は、約18万人の公務員が利用する稼働中のインフラであり、データ・運用・行政業務特化という点で戦略的自律性を確保している。一方でこれは、AWSがオープンソースとして公開する GenU（Generative AI Use Cases）を基盤にデジタル庁が内製開発したものであり、本年4月にその一部を商用利用可能なライセンスでGitHub公開している。オープンソースを取り込んで構築し、オープンソースとして返した、という循環である。主権とオープンは対立するものではなく、設計上の選択として両立させ得る。</p>
+
+<figure>
+  <img src="images/IMG_8776.jpeg" alt="Sovereign Openness スライドと会場">
+  <figcaption><span class="fig-label">Day4 ｜ 図19</span>　<strong>Sovereign Openness in Practice: Gennai（源内）.</strong> Why Sovereign / Why Open を対置したスライドと会場（ECOSOC Chamber）。</figcaption>
+</figure>
+<figure class="figure-lg">
+  <img src="images/IMG_8761.jpeg" alt="登壇後、イーストリバーを背景に">
+  <figcaption><span class="fig-label">Day4 ｜ 図20</span>　登壇後、イーストリバーを背景に。日本チーム7名。</figcaption>
+</figure>
+
+<p>② <strong>Compliance as Leadership（規律遵守こそがリーダーシップ）</strong>：デジタル庁には正式な組織としてのOSPOは存在しないが、コードレビュー、ライセンスチェック、リリース基準の判断、部門間調整といったOSPOとしての機能は、源内のOSS化等を通じて実態として確立しつつある（"virtual government OSPO"）。組織の形が整う前に機能が先行している状態であり、これを "Function precedes form" として説明した。</p>
+
+<figure>
+  <img src="images/IMG_8779.jpeg" alt="Virtual Government OSPO at Work スライドと7名パネル">
+  <figcaption><span class="fig-label">Day4 ｜ 図21</span>　<strong>Virtual Government OSPO at Work.</strong> スクリーンは「形式に先立つ機能（function precedes form）」のスライド。手前は産官学7名のパネル（登壇者は図18参照）。</figcaption>
+</figure>
+
+<p>現地での反響として、当日キーノートを務めたタンザニアの担当大臣から日本の経験の移転可能性に関する質問を受けたほか、フランスの政府OSPO（DINUM）からも連携の打診があった。</p>
+<p>関係の広がりも、この登壇を接点に生まれた。OSEC設計の中心である Sachiko Muto 氏（RISE／OpenForum Europe）が本セッションに来場し、登壇後に紹介を得た。UN Open Source Coordinator の Omar Mohsine 氏も本セッションを途中から傍聴した。さらに、Linux Foundation の Jim Zemlin Executive Director も講演後に立ち寄り、対話の機会を得た。これらは、第4部に後述するOSECおよびオープンソースコミュニティとの継続的関与の接点である。</p>
+
+<figure>
+  <img src="images/IMG_8812.jpeg" alt="登壇後、壇前での対話">
+  <figcaption><span class="fig-label">Day4 ｜ 図22</span>　登壇後、壇前での対話。OSEC設計の中心である Sachiko Muto 氏（RISE／OpenForum Europe）が当職に話しかける場面。右は Mary Meixia Wang 氏（OpenChain — Linux Foundation傘下プロジェクト — Executive Director）。各国政府・OSEC関係者との継続的関与は、この登壇を接点に広がった。</figcaption>
+</figure>
+<figure class="fig-m">
+  <img src="images/IMG_8840.jpeg" alt="Jim Zemlin氏と登壇後に">
+  <figcaption><span class="fig-label">Day4 ｜ 図23</span>　登壇後、Jim Zemlin 氏（Linux Foundation Executive Director）と（ECOSOC Chamber）。同氏が講演後に立ち寄り、対話の機会を得た。</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="pull">
+  <p>自国を、自国の言葉で記述する責務を引き受けること。それを外部に委ねないこと ── それがデータ主権である。You cannot outsource self-understanding.</p>
+  <div class="who">当職 ／ Morocco・UNDP High-Level Roundtable（6/23）</div>
+</div></div>
+<section class="band band-navytext">
+  <div class="band-bg"></div>
+  <div class="wrap">
+    <h3>Open Source を語る舞台</h3>
+    <p>議場、庭園、壁画、そして平和維持活動の展示。セッションの合間に歩いた国連本部の風景。Open Source を語る場が、たまたまここだったのではない。ここで語ることに、意味があった。</p>
+    <div class="gallery">
+      <figure><img src="images/IMG_2865.jpeg" alt="安保理議場"><figcaption>安保理議場と Per Krohg の壁画</figcaption></figure>
+      <figure><img src="images/IMG_2947.jpeg" alt="館内の壁画"><figcaption>Conference Building の壁画</figcaption></figure>
+      <figure><img src="images/IMG_2944.jpeg" alt="平和維持の展示"><figcaption>Peace and Security 展示</figcaption></figure>
+      <figure><img src="images/IMG_2945.jpeg" alt="日本庭園"><figcaption>日本庭園越しのマンハッタン</figcaption></figure>
+    </div>
+  </div>
+</section>
+<section class="band">
+  <div class="band-bg" style="background:linear-gradient(180deg,rgba(8,20,46,.66),rgba(8,20,46,.80)),url('images/IMG_2859.jpeg') center/cover no-repeat"></div>
+  <div class="wrap">
+    <h3>各国からの贈り物に満ちた場所</h3>
+    <p>セッションの合間、ある国連職員の案内で、Quiet Room と安保理議場を続けて見せてもらった。Quiet Room は安保理議場に隣接し、非理事国が理事国と非公式に情報を交わすための部屋。1978年にドイツが調度を寄贈し、2013年に同国の支援で改修された。壁のタペストリーは、ドイツの森を描いている。隣にはポーランドが2019年に寄贈した NAM Caucus Room。</p>
+    <p>国連本部は、各国からの贈り物に満ちている。部屋、彫刻、絵画、壁画 ── その多くを案内してもらった。思い返せば、贅沢な時間だった。Open Source を開かれた場で語りに来た私たちは、外交がずっと閉ざされた部屋で言葉を交わしてきた、この場所に立っていた。開くことと、閉じること。その境界をどこに引くかを、誰が決めるのか。</p>
+    <div class="gallery">
+      <figure><img src="images/IMG_2859.jpeg" alt="The Quiet Room"><figcaption>The Quiet Room（ドイツ寄贈）</figcaption></figure>
+      <figure><img src="images/IMG_2866.jpeg" alt="NAM Caucus Room"><figcaption>NAM Caucus Room（ポーランド寄贈）</figcaption></figure>
+      <figure><img src="images/IMG_2869.jpeg" alt="ドイツ寄贈のプレート"><figcaption>Gift from Germany, 1978 &amp; 2013</figcaption></figure>
+      <figure><img src="images/IMG_2867.jpeg" alt="ポーランド寄贈のプレート"><figcaption>Donation from Poland, 2019</figcaption></figure>
+    </div>
+  </div>
+</section>
+<section class="day">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">DAY 5</span><h2>Community Day（IBM One Madison）</h2></div>
+    <div class="narrow"><p class="day-lead">会場をIBM One Madisonに移し、終日 in-person で開催されたコミュニティ主導の日。4トラック（AI／DPI／Capacity Building／SDGs）に加え、カフェテリア・トラックを併設。各セッションは Lightning Talk 5分（スライド禁止）→ モデレートパネル → 会場Q&A の形式。</p></div>
+    <div class="body narrow">
+<div class="grid2">
+  <figure>
+    <img src="images/IMG_3145.jpeg" alt="Community Day 開会">
+    <figcaption><span class="fig-label">Day5 ｜ 図24</span>　<strong>Open Source for Global Good — Community Impact.</strong> プレナリー開会。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/IMG_3147.jpeg" alt="Community Day Full Agenda">
+    <figcaption><span class="fig-label">Day5 ｜ 図25</span>　<strong>Community Day — Full Agenda.</strong> 4トラック×全スロットの構成。</figcaption>
+  </figure>
+</div>
+
+<h3>1.2（続）当職の登壇 ― Day5 AI-Ready Open Data</h3>
+<p>当職は、DPIトラック（Auditorium B）の最終スロット（15:40〜16:40）「Digital Commons in the Era of AI: Open Data, Civic Infrastructure, and DPI in Practice」に登壇した。モデレーターは Remy DeCausemaker 氏（CMS Digital Service のオープンソースリード）。共演者は Hana Frluckaj 氏（University of Virginia／University of Texas at Austin）、Sayeed Choudhury 氏（Carnegie Mellon／Open Forum for AI）。</p>
+<p>5分のLightning Talkでは、「日本の法令に関する多肢選択式QAデータセット（lawqa_jp）」を呼び水として発信した。これは内閣府CSTI／BRIDGEのもとで実施した調査研究の成果として2025年10月に試験公開したものであり、当職は当該調査研究をプログラムディレクター（PD）としてリードした。</p>
+<p>話の軸に置いたのは、lawqa_jp の整備過程で得た一つの経験である。弁護士2名が全問について合意した正答キー付きの法律四択問題のうち140問を、正答キーを付けずに、3社3種の言語モデルに解かせた。7問でモデル同士の答えが一致して正答キーと食い違い、弁護士による再点検の結果、うち4問は機械側が正しかった（1問は正答の誤記、3問は設問の曖昧さ）。「AIは裁定者（judge）ではなく second opinion であり、不一致はシグナルにすぎず、最終判断は人間が行った」――この判定を明確にした上で、専門家が作る正解にも誤り率があること、したがってAI学習に資するデータ（評価用・コンテキスト用・学習用）のうち「評価用データ」を最優先すべきこと（「正確なものさしがなければ、AI導入の効果は判断できない」）を述べた。</p>
+<p>あわせて、lawqa_jp が GitHub上で初めて公共データ利用規約（PDL）を適用したデータセットであること――データの二次利用ライセンスとソフトウェアの二次利用（OSS）を一つの具体物で橋渡しした事例――、および担当事業の名称自体を「機械可読性の向上」から「AI学習データへの変換」へ改めたこと（名称の変更こそが政策転換である）に触れた。さらに、オープンデータ定義の「目的を問わない（any purpose）」をめぐる進行中の議論を、解決済みの主張としてではなく開かれた問いとして提示し、「オープンは公共データの出発点であり、キュレーションがそれをAI-readyにする」と結んだ。</p>
+
+<figure>
+  <img src="images/IMG_8899.jpeg" alt="Session 3 パネル">
+  <figcaption><span class="fig-label">Day5 ｜ 図26</span>　<strong>Session 3 パネル.</strong> Auditorium B（Level 10）、全面ガラス窓の向こうにマディソンスクエア界隈。当職、Frluckaj氏、Choudhury氏、モデレーター DeCausemaker氏。</figcaption>
+</figure>
+
+<p>パネルでは、モデレーターからの割当2問に応答した。第一の問い（単に開かれていることを超え、政府データを真にAI-readyにするには何が必要か）に対しては、machine-readable を超え machine-understandable であること――データがスキーマ・来歴・想定用途・最終確認日を自ら携え、自己記述できる状態――を目指すべきこと、そしてキュレーションは一度きりの作業ではなく、その維持を政策自体に組み込むべきことを述べた。</p>
+<p>第二の問い（openness・licensing・長期的な再利用可能性の両立）に対しては、三者は「バランスを取る」対象ではなく緊張関係にあり、有用な視点は「確実性をどこに置くか」であると述べた。AIの判断は決して確実なものとして扱うべきでない一方、データを統治する規則――個人情報の保護、同意、利用境界――は確率の問題ではなく譲れない一線である。その譲れない規則を、人間が読むライセンス文やモデルが無視し得るプロンプトといった「ソフトな場所」に置き続けている――「宣言は強制力ではない。プロンプトは要請にすぎない」。あるべきは、データ自身が利用許諾（permission）を携え、機械が動作する前にそれを検証する方向であり、同じ方向の取組として LF AI & Data コミュニティの DocLang に言及した（この方向を一歩進めた概念整理と小規模な参照実装を、公共財として公開済みであることにも触れた）。厳格さは利用を閉ざすものではなく、破れない安全弁があってこそ曖昧さの中へ踏み込み価値を解き放てる――「良いガバナンスは利用を妨げず、可能にする」。したがって政策立案者の仕事は「バランスを取る」ことではなく「設計する（design）」ことである、と結んだ。会場との質疑では、会期の通奏低音であった LeCun の "medieval"／印刷機のキーノートを踏まえた質問を受け、これを sovereignty に関する問いと引き取って応答した。</p>
+
+<figure>
+  <img src="images/IMG_8901.jpeg" alt="会場との対話">
+  <figcaption><span class="fig-label">Day5 ｜ 図27</span>　会場との対話。medieval／印刷機の系譜に連なる質問への応答の場面。応答の内容は補遺Aに詳述。</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+<section class="day">
+  <div class="wrap">
+    <div class="narrow">
+<h2 class="part">補遺A　Day 5 Session 3 ― アジェンダの変遷と当日の応答</h2>
+
+<p>当職が登壇した Day 5 の DPIトラック最終スロット「Digital Commons in the Era of AI: Open Data, Civic Infrastructure, and DPI in Practice」（Session 3）は、企画から当日実施までの間に登壇構成が三段階で変化した。以下に、文書として残る二段階と、当日の実施内容を整理する。枠組み・時間帯（15:40〜16:40）・当職への割当テーマ（AI-Ready Open Data ／ Japan Digital Agency）は三段階を通じて一貫していた。</p>
+
+<h3>A.1　三段階の変遷</h3>
+<table style="width:100%;border-collapse:collapse;font-size:9.5pt;margin:10pt 0;">
+  <thead>
+    <tr style="border-bottom:2px solid var(--accent);text-align:left;">
+      <th style="padding:6pt 8pt;">段階</th>
+      <th style="padding:6pt 8pt;">典拠文書</th>
+      <th style="padding:6pt 8pt;">登壇者</th>
+      <th style="padding:6pt 8pt;">モデレーター</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--rule);">
+      <td style="padding:6pt 8pt;">① 初期案</td>
+      <td style="padding:6pt 8pt;">5/28 主催者メール（Session 1–3）</td>
+      <td style="padding:6pt 8pt;">各5名想定</td>
+      <td style="padding:6pt 8pt;">Nithya Ruff ＋ Johan Linåker</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--rule);">
+      <td style="padding:6pt 8pt;">② 朝版</td>
+      <td style="padding:6pt 8pt;">Speaker FAQ プログラムグリッド</td>
+      <td style="padding:6pt 8pt;">6名（Koto Qalo／M Lyigakpoa／当職／Purva Agrawal／Sayeed Choudhury／Hana Frluckaj）</td>
+      <td style="padding:6pt 8pt;">（記載なし）</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--rule);">
+      <td style="padding:6pt 8pt;">③ 当日実施</td>
+      <td style="padding:6pt 8pt;">文書なし（録画は後日提供見込み）</td>
+      <td style="padding:6pt 8pt;">3名（当職／Hana Frluckaj／Sayeed Choudhury）</td>
+      <td style="padding:6pt 8pt;">Remy DeCausemaker</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note">当日モデレーターを務めた Remy DeCausemaker 氏は、CMS Digital Service のオープンソースリード（CMS初のOSPO設計）であり、以前はGSA傘下18Fのexecutive directorを務めた。</div>
+
+<h3>A.2　当職への割当質問</h3>
+<p>企画から当日まで、当職に対するモデレーター質問は次の2問で概ね一貫していた。</p>
+<p style="border-left:2px solid var(--accent);padding-left:10pt;color:var(--ink-soft);"><em>① 政府データを、単に開かれているだけでなく、真にAI-readyにするには何が必要か。<br>② データがAI学習に用いられるとき、政策立案者は openness・licensing・長期的な再利用可能性をどう両立させ得るか。</em></p>
+<p>両問への当日の応答は、本編 Day5「1.2（続）」(3) に記したとおりである。</p>
+
+<h3>A.3　会場からの質問への応答 ― "medieval"／印刷機の系譜への引き取り</h3>
+<p>会場との質疑で、当職は会期の通奏低音であった LeCun の "medieval obscurantism"／印刷機のキーノート（Day 2）に連なる質問を受けた。当職の応答は以下の三段であった。</p>
+<ul>
+  <li>まず「それは <strong>sovereignty（主権）についての質問だと受け止める</strong>」と引き取った。</li>
+  <li>その観点から、<strong>自分たちがコントロールできる価値観・文化・言語の評価データセットのCurationに注力すべき</strong>だと述べた。</li>
+  <li>そして、<strong>いま話題の（基盤モデルの）レイヤーがコモディティ化した後に備えよ</strong>、と結んだ。</li>
+</ul>
+<p>モデレーターの Remy DeCausemaker 氏は、この応答を「ユニークな見解（unique perspective）」と評した。</p>
+
+<figure>
+  <img src="images/IMG_8897.jpeg" alt="会場との対話（Session 3）">
+  <figcaption><span class="fig-label">補遺 ｜ 図A-1</span>　会場との対話（Auditorium B）。A.3に記した応答の場面。</figcaption>
+</figure>
+
+<h3>A.4　位置づけ</h3>
+<p>この応答は、当職のLT／パネルの核（"openであるだけではAI-readyにならない。curationこそが公共セクターの最重要の貢献である"）を、LeCunの sovereignty・フェデレーテッド構想に接続したものである。「開いた先で何を拠出するか、その質をどうcurateするか」というデータ側からの一段深い問いを差し込んだ点で、"アクセスを制限するな・開け" という主流の論調に対し、一段深い視点からの発言であった。レイヤーのコモディティ化に備えるという時間軸の置き方は、Day 4の "function precedes form" の見立てとも一貫している。中央政府の実務者として現物の評価データを持つ唯一の登壇者、というポジションがそのまま効いた場面であった。</p>
+    </div>
+  </div>
+</section>
+<section class="day part">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">第2部</span><h2>後援（Endorsement）の背景と、想定した意義の確認</h2></div>
+    <div class="body narrow">
+<h3>2.1　後援の背景と、事前に想定した意義</h3>
+<p>後援の経緯と本報告書の目的は冒頭「本報告書について」に、UN Open Source Week の位置づけは第1部1.1に、それぞれ記したとおりである。</p>
+<p>後援にあたって想定した意義は、概ね次の3点であった。</p>
+<ol>
+<li>国際的プレゼンスの向上（発信およびネットワークの構築）</li>
+<li>オープンソース推進への貢献の対外的明示、コミュニティとの連携</li>
+<li>政策・技術情報の収集（各国事例の把握と国内施策へのフィードバック）</li>
+</ol>
+<p>加えて、後援判断の過程では「全庁にとっての価値を示すこと」が問われた。本報告書は、この問いに応えることも企図している（後述 2.4）。</p>
+<p>本部分では、これら事前に想定した意義が、実際の出張を通じてどのように確認されたかを述べる。</p>
+<h3>2.2　想定意義の確認 ― 事実に基づく照合</h3>
+<h4>(1) 国際的プレゼンス</h4>
+<p>UN Open Source Week 2026 の公式パートナーページにおいて、デジタル庁は Member States のカテゴリに「Endorsement」として掲載された（Co-Host とは異なる位置づけである）。</p>
+<figure class="fig-m">
+  <img src="images/partners_member_states.png" alt="UN OSW 2026 公式Partnersページ Member States">
+  <figcaption><span class="fig-label">第2部 ｜ 図2-1</span>　UN Open Source Week 2026 公式サイト Partners ページ（Member States）。デジタル庁は「Endorsement」として掲載されている（他の掲載8カ国はいずれも Co-Host）。出典：unopensource.org/partners（2026年7月2日閲覧）。</figcaption>
+</figure>
+<p>また、Day4のCountry Spotlightへの当職の登壇は、ODET事務次長（USG）Amandeep Singh Gill 氏名による正式な招聘状（3月30日付）に基づくものであった。さらに、6月23日にUSGが主催したHigh-Level Lunch（閣僚および上級参加者を対象とした昼食会）にも招待を受け、大臣が出席できなかったことから、当職がデジタル庁の代表として参加した。</p>
+<p>これらは、UN Open Source Week における日本（デジタル庁）の位置づけを示すものである。</p>
+<h4>(2) UN Amplify ― 国内の取組の国際的な増幅</h4>
+<p>Day4のCountry Spotlightで産官学が共有した「Japan Model（和）」は、産業・行政・学術・コミュニティという四つの担い手による一つの運動として提示された。当職はDay4の発信において、「日本が国連に売り込んだのではなく、国連が、日本国内で既に進んでいた取組を増幅（amplify）した」と述べた。</p>
+<p>実際、2025年12月のOpen Source Summit Japanにおける産官学パネルの議論に国連側が着目したことが、本Country Spotlight実現の契機となっている。後援（Endorsement）の意義は、この「日本の取組が国際的に増幅される場に、庁として正式に名を連ねた」点にある。</p>
+<p>なお、この「Japan Model」は、産官学コミュニティの有志により、CC BY 4.0 の公開リポジトリに "living document" として公開されており、完成された模範例としてではなく、構成や代表性に関する指摘も公開の場で受け止めながら改善を続ける、進行中の文書として差し出されている。</p>
+<h4>(3) ネットワーク構築と情報収集 ― 登壇を起点とする質の高い関係構築</h4>
+<p>事前に想定した「ネットワーク構築」「政策・技術情報の収集」は、具体的に実現した。ここで、そのメカニズムについて述べておきたい。これは、2年連続で参加した経験を通じて確認された知見である。</p>
+<p>「登壇」の意義は、その場での発信に留まらない。登壇者として認知されることで、</p>
+<ul>
+<li>発信した内容に対する直接のフィードバックを得る機会</li>
+<li>登壇者コミュニティに参入する機会</li>
+<li>聞いて分からなかった点を尋ね、逆に自ら相手にフィードバックを返すという、双方向のやり取りを通じた関係構築の機会</li>
+</ul>
+<p>が開かれる。これらは分かちがたく一体であり、「登壇する意義」の本体をなす。レセプション等の非公式な場は、このフィードバックと関係構築が実際に行われる場として機能する。</p>
+<p>この点は、一般の立ち話による接点とは質的に異なる。誰彼構わぬ立ち話では、対話が成立せず一方的な売り込みに終始する場面も少なくない。これに対し、登壇を起点とした接点は、相互の関心と理解に基づく、継続性のある関係に発展しやすい。</p>
+<p>実際、本会議は、登壇者・各国常駐代表部・国際機関の幹部・各国オープンソースコミュニティ・民間が、階層を問わずフラットに対話できる場であった。閣僚級・機関幹部級（モロッコ・タンザニア両大臣、Linux Foundationの Jim Zemlin 会長、UNDPの幹部、各国常駐代表部 等）から、コミュニティ・実務級（フランス政府OSPO（DINUM）、台湾のOpen Culture Foundation、CKANに精通する Joel Natividad 氏（DatHere）、OSHEN LABSの Hassan Mohamed 氏、フランスのOSS推進企業LinAgoraの Alexandre Zapolsky 氏 等）まで、多層的な接点を得た。とりわけ、Day4のCountry Spotlight後には、OSEC（後述・第4部）の設計に携わる RISE のメンバーから声をかけられ、後の継続的な連携の端緒を得た。これは、登壇を起点とした接点が継続的な関係に発展する好例である。</p>
+<p>以上より、後援し、登壇者を送り出すことの意義は、単なる国際的プレゼンスの露出にとどまらず、質の高い双方向の関係構築のサイクルに庁として参入することにあると考える。</p>
+<h3>2.4　全庁にとっての価値 ― デジタル公共財と、ライセンスの共通哲学</h3>
+<p>後援判断の過程で問われた「全庁にとっての価値」について述べる。ここで強調したいのは、UN Open Source Week が扱う主題は「オープンであること」それ自体ではなく、オープンソースおよびオープンデータを "デジタル公共財（Digital Public Goods）" として捉え、それをいかに作り、維持し、主権的に活用するかという、より広い視点であるという点である。UN Open Source Week 自体、オープンソースを目的としてではなく、DPI（デジタル公共インフラ）と持続可能なAIの中核的なイネーブラーとして位置づけている。</p>
+<p>この視点に立つとき、ソフトウェアとデータは地続きである。その接点が、両者の「二次利用ライセンス」の共通性にある。行政のオープンデータは、オープンデータ基本指針等により、CC BY 4.0 互換の「公共データ利用規約（PDL）」への準拠が定められている。オープンソースソフトウェアもまた、二次利用を前提とした開放的ライセンスの上に成り立つ。両者は、「権利者と再利用者の社会契約」という同一の構造を持つ。</p>
+<p>この連続性を象徴するのが、Day5で発信した lawqa_jp である。これは、公共データ利用規約（PDL）を、オープンソース開発の中心地である GitHub に初めて持ち込んだ事例であり、データ側とソフトウェア側を一つの具体物で橋渡しした。当職は、データユニット長として、また内閣府CSTI／BRIDGE調査のプログラムディレクターとして、ODET事務次長（USG）からの招聘を受けて本会議に登壇した。データとソフトウェアにまたがるこの連続性は、その発信の背景をなすものである。</p>
+<p>もっとも、デジタル公共財をめぐる論点は「オープンか否か」に尽きるものではない。その持続可能性（誰が保守し、誰が資金を負担するか）、サプライチェーン上の脆弱性、そして戦略的自律性（sovereignty）の確保といった課題が一体として問われている。AIの時代において、「目的を問わず自由に利用可能」とする従来のオープンの定義に対し、「目的による留保」を含む方向への移行が各国共通の課題となりつつあることも、その一つである。</p>
+<p>この「オープンの定義」の境界設計をはじめとするデジタル公共財のガバナンスは、調達・標準化・データ戦略・AIといった全庁の担務すべてに関わる、国際的なルールメイキングの論点である。日本が、この議論に規範の受け手としてではなく、設計の段階から関与し得る立場を得つつあることは、全庁にとっての資産となり得る。ただし、その関与の度合いについては、機会と留意点の双方を勘案した庁としての判断を要する（第4部参照）。</p>
+    </div>
+  </div>
+</section>
+
+<section class="day part">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">第3部</span><h2>OSPOに関する認識 ― 今般の出張を通じて確認できたこと</h2></div>
+    <div class="body narrow">
+<h3>3.1　なぜOSPOを一つの柱として報告するか</h3>
+<p>今般訪れた UN Open Source Week 2026 は、5日間のうちの1日（6月25日）を「OSPOs for Good」に充てていた。国連がこの日に掲げた第一の目的は、「Member States に対するOSPO（Open Source Program Office）の実装を提唱し、ガバナンスの各層を横断してオープンソース戦略を実行する中心的な柱として位置づけること」であった。</p>
+<p>すなわち、OSPOは、もはや一部の先進的なIT企業の組織論ではなく、各国政府が取り組むべき政策課題として、国連の場で正面から提唱される段階に入っている。この潮流の中で、デジタル庁におけるOSPOの現状と、その政策的な意味合いについて、今般の出張を通じて確認できたことを、本報告書の一つの柱として記録する。</p>
+<h3>3.2　デジタル庁におけるOSPOの現状 ― 組織はないが、機能は確立しつつある</h3>
+<p>デジタル庁には、現時点で、正式な組織としてのOSPOは存在しない。法的な位置づけも、公式な憲章もない。</p>
+<p>しかし、コードレビュー、ライセンスのチェック、リリース基準の判断、部門間の調整といった、OSPOが本来担うべき機能は、実態として既に確立しつつある。当庁は、正式なOSPOを持たないまま、数年にわたってオープンソースの公開を行ってきた。ガバメントAI「源内」のOSS化（本年4月）は、その規模ゆえに、こうした機能をあらためて言語化し、運用として整える契機となった。当職は、Day4のCountry Spotlightにおいて、これを "virtual government OSPO（実態としては機能しているが、まだ正式ではないOSPO）" として発信した（この発信内容は、昨年12月のOpen Source Summit Japanで既に公表済みの範囲内である）。</p>
+<p>当職自身も、オープンデータ・GIF班の担務群リーダーとして有するデータの二次利用ライセンスの知見が、ソフトウェアの二次利用（OSS）の領域にも通じることから、源内のOSS化にあたり庁内に設けられた検討の場を通じて、この virtual OSPO の一翼を担っている。</p>
+<div class="note"></div>
+<h3>3.3　政策的重要性 ― Sovereignty と Vulnerability への対応として</h3>
+<p>今般、「OSPOs for Good」をはじめとする各セッションを通じて確認できたのは、OSPOの機能が、二つの政策的要請への対応として、各国共通の重要性を増しているという点である。</p>
+<h4>(1) Sovereignty（戦略的自律性）への対応</h4>
+<p>オープンソースは、重要なデジタルシステムに対する制度的なコントロールを自国に確保する手段となる。ガバメントAI「源内」は、約18万人の公務員が用いる稼働中のインフラであり、データ・運用・行政業務への特化という点で、戦略的自律性を体現している。OSPO機能は、こうした自律性を、品質・透明性を保ちながら維持・運用していくための要となる。</p>
+<h4>(2) Vulnerability（脆弱性）への対応</h4>
+<p>一方で、オープンソースの活用は、ライセンス違反やサプライチェーン上の脆弱性といったリスクを伴う。これらに対し、ライセンスの管理・監査、SBOM（ソフトウェア部品表）の整備、コンプライアンスの確保といったOSPO機能が、リスクを低減する役割を担う。会期中、重要なOSSインフラの保守（Maintain-A-Thon、Day1）や、公共部門のOSS貢献を可視化する取組（Public Code Observatory、Day3）など、持続可能性と脆弱性への対応をめぐる議論が随所で展開された。</p>
+<p>この「Sovereignty と Vulnerability」という二つの要請は、国連側の問題意識とも通底していた。会期を通じ、国連の幹部からは、デジタル主権を孤立ではなく集合的な強さとして捉えるべきこと、信頼なくして普及はなく普及なくして効果はないこと、セーフガードは設計の段階から組み込まれるべきこと、といった趣旨の議論がなされた。OSPOは、まさにこの「自律性の確保」と「信頼・安全の作り込み」を、組織的な機能として担保する仕組みとして位置づけられている。</p>
+<h3>3.4　国際的な議論が、庁内の検討に資する</h3>
+<p>今般の出張で得た接点は、デジタル庁におけるOSPOの検討にとっても、有益な示唆をもたらすものであった。</p>
+<ul>
+<li>Day4のCountry Spotlightにおける当職の発信に対し、当日キーノートを務めたタンザニアの担当大臣から、日本の経験の移転可能性に関する質問が寄せられた。</li>
+<li>本セッションを契機に、フランスの政府OSPO（DINUM）からも連携の打診があった。</li>
+<li>「OSPOs for Good」の場では、低中所得国の政府OSPO設立をめぐるセッション（トリニダード・トバゴ、ケニア等）や、大学・研究機関のOSPOをめぐるセッションなど、多様な主体のOSPOに関する議論が並行して展開された。</li>
+</ul>
+<p>このように、政府OSPOをめぐる議論は、先進国・途上国を問わず、また政府・学術・産業を横断して、国際的に活発化している。これらの知見は、デジタル庁が自らのOSPOのあり方を検討するうえで、有益な参照となるものである。</p>
+<h3>3.5　小括</h3>
+<p>以上を要約すれば、デジタル庁におけるOSPOは、組織としては存在しないが、機能としては実態として確立しつつあり、Sovereignty（戦略的自律性）と Vulnerability（脆弱性）への対応として、その政策的重要性を増している。そして、この認識は、国連が「OSPOs for Good」として各国にOSPO実装を提唱する潮流、および会期中に得た各国・各機関との接点を通じて、あらためて確認されたものである。正式な組織としてのOSPOのあり方については、こうした国際的な議論の動向も踏まえつつ、引き続き庁内で検討されるべき事項である。</p>
+    </div>
+  </div>
+</section>
+
+<section class="day part">
+  <div class="wrap">
+    <div class="day-head"><span class="day-num">第4部</span><h2>継続事項と今後 ― 今後の検討に向けて</h2></div>
+    <div class="body narrow">
+<p>本報告書の目的の一つは、今後、デジタル庁が UN Open Source Week への関与を検討する際に、ゼロからの説明を要せず、本報告が参考となることにある。本部分では、今般の出張を通じて生じた継続的な接点・案件を整理し、それぞれについて、機会と留意点の双方を記す。いずれも、関与の度合いについては庁としての判断を要するものである。</p>
+<h3>4.1　構築した継続的な接点（概観）</h3>
+<p>今般の出張を通じて、以下の継続的な接点が生じた。</p>
+<table class="ptbl">
+<tr><th>相手・枠組み</th><th>概要</th><th>状況</th></tr>
+<tr><td>OSEC（国連ODET × RISE × GitHub）</td><td>各国のオープンソース・エコシステムを測定する指標枠組み</td><td>Day1ワークショップにオブザーブ参加、追加インタビューを受諾</td></tr>
+<tr><td>Linux Foundation</td><td>継続的な対話</td><td>詳細は調整中につき公開版では割愛</td></tr>
+<tr><td>米商務省</td><td>継続的な対話</td><td>詳細は調整中につき公開版では割愛</td></tr>
+<tr><td>モロッコ政府・UNDP（D4SD）</td><td>D4SD Hub の今後の作業計画</td><td>登壇済み、当日の記録（写真・議事録）の共有をUNDP側と調整中</td></tr>
+<tr><td>各国の政府OSPO（仏DINUM 等）</td><td>OSPOをめぐる連携</td><td>打診・関心の表明</td></tr>
+<tr><td>国内学術（名古屋大学・NII 等）</td><td>Academic OSPO の取組</td><td>詳細は調整中につき公開版では割愛</td></tr>
+</table>
+<p>以下、特に庁としての判断を要する案件について、機会と留意点を述べる。</p>
+<h3>4.2　OSEC（Open Source Enablement Compass）</h3>
+<p>OSECは、国連ODETを主体に、RISE（スウェーデン）との協働で進められる、各国のオープンソース・エコシステムを測定するevidence-basedなフレームワークであり、GitHubおよびEthereum Foundationの支援により発足した。当職は、Day1のCo-design Workshopにオブザーブ参加し（口頭の発言は行っていないが、Mentiを通じて設計面の意見を一件提出した。Day1参照）、会期を通じてRISE等から繰り返し対話の機会を得た。後日、追加インタビューの依頼を受け、これを受諾している。</p>
+<p>帰国後の7月、第1回Co-designワークショップの速報報告書「OSEC Co-design iteration #1」が公刊された。同報告書によれば、OSECは年次・自己申告型の評価枠組みとして設計され、各国の報告主体（national focal point）として公共部門のOSPOが想定されている。結果はランキングではなく自己改善と相互学習に用いるとされ、データの提供・参照の基盤として対話型プラットフォーム「OSEC Atlas」の構築が予定されている。報告主体にOSPOを置くという設計は、第3部で述べたOSPOの政策的重要性に、国際的な測定枠組みへの接続窓口という新たな観点を加えるものである。</p>
+<p>OSECは、なお初期の設計段階にある。設計プロセスへの早期の関与は、評価の枠組みに関する国際的な議論に日本の視点を反映させ得る機会である。一方で、留意すべき点もある。</p>
+<ul>
+<li>OSEC側は「ランキングではない」と説明しているが、スコアに基づいて各国を序列化するという構造自体は、OECDの類似の指標と共通する。</li>
+<li>検討はGitHubを軸に進められており、対話の中心は米国のオープンソース・コミュニティの関係者が多い。</li>
+<li>日本に対しては、スポンサー、看板（旗振り役）、データ提供といった、複層的な期待が寄せられている。</li>
+</ul>
+<p>これらをどう捉えるかは、初期段階から関与することのメリットと、特定の枠組み・プラットフォーム・コミュニティへの肩入れと受け取られるリスクの双方を、総合的に勘案したうえで、デジタル庁として判断すべき事項である。当面は、庁として、追加インタビューに応じるなど関与の窓を閉ざさないようにしつつ、適切な距離感を保つことが適当と考える。</p>
+<p>なお、公共部門のオープンソース貢献を可視化する取組としては、OSECのほかに、Software Heritage・UNESCO等による Public Code Observatory（Day3）も始動している。これら「測定・可視化」をめぐる国際的な動きは、今後、日本の政府OSSの取組とも関わり得るものとして、注視に値する。</p>
+<h3>4.3　Linux Foundation との継続事項</h3>
+<p>※本節に記載していた事項は、調整中・未公表の予定および相手方の個人名を含むため、公開版では割愛した。</p>
+<h3>4.4　日米連携に係る継続事項</h3>
+<p>※同上の理由により、公開版では割愛した。</p>
+<h3>4.6　小括 ― 今後の検討に向けて</h3>
+<p>今般の出張を通じて、デジタル庁は、国連の枠組み（OSEC）、国際的な財団（Linux Foundation）、二国間（米商務省）、各国政府・学術機関との間に、複数の継続的な接点を得た。これらは、本会議への後援を通じて開かれた関係の延長線上にあるものである。</p>
+<p>今後、UN Open Source Week および関連する場への関与をどの程度・どのような形で行うかは、本報告書に記した機会と留意点を踏まえ、庁として判断されるべき事項である。本報告書が、その判断にあたり、ゼロからの状況把握を要しないための参考となることを企図している。</p>
+<h3>附属資料（参照リンク）</h3>
+<div class="note">※写真は本編（第1部）に図版として収録した。</div>
+<ul>
+<li>Japan Model（定義書 v1.0／全登壇資料、CC BY 4.0）：github.com/oss-japan-model</li>
+<li>lawqa_jp（公共データ利用規約／GitHub）</li>
+<li>内閣府CSTI／BRIDGE「政府等が保有するデータのAI学習データへの変換に係る調査研究」最終報告書</li>
+<li>ODET招聘状、D4SD招待状（モロッコ大臣親書）・Concept Note</li>
+<li>国連公式LinkedIn（登壇関連投稿）／各登壇の録画（国連側から事後提供見込み）</li>
+<li>OSEC速報報告書「OSEC Co-design iteration #1」（RISE／UN ODET、2026年7月）</li>
+</ul>
+<p>※URL・録画は帰国後に確定。</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>持ち帰ったのは、結論ではなかった。</h2>
+    <p>開くことは、すべてを明け渡すことではなかった。どこに線を引くか ── その判断こそが、開くという行為の核にあった。主権とは何か。何を拠出し、何を curate するのか。基盤モデルがコモディティ化した先に、公共セクターは何を残せるのか。</p>
+    <p>答えは持ち帰れなかった。だが、問いは持ち帰った。</p>
+    <p class="amplify">Bring yours. The UN can amplify it.</p>
+    <div class="cap">国連本部前の彫刻『Non-Violence（The Knotted Gun）』（Carl Fredrik Reuterswärd 作）</div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <p><b>本書の利用について</b>　本書の本文は、公共データ利用規約（第1.0版）——CC BY 4.0互換——の下で利用できる。図版は同規約の対象外である。<br><br><b>図版の出所</b>　本報告書に収録した図版の出所は次のとおりである。国連本部内および各セッション会場の写真、他の登壇者の写真、レセプションの写真は、当職が現地で撮影した。当職自身が登壇した Country Spotlight のセッション写真は、登壇者に随行された方々から提供を受けたものである。Day1のOSECワークショップ集合写真は、主催者から提供を受けたものである。口絵は UN ODET 公式 LinkedIn からの転載である。第2部の図2-1は UN Open Source Week 公式ウェブサイトのスクリーンショットである。各図版の二次利用にあたっては、それぞれの権利者・出所に帰属を明示し、その許諾条件に従うこと。</p>
+    <p style="margin-top:14px;">デジタル庁　｜　UN Open Source Week 2026 出張報告書（公開版）</p>
+  </div>
+</footer>
+</body>
+</html>
